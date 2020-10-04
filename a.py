@@ -9,7 +9,7 @@ import elevation
 import richdem
 import geopandas
 from pyspatialml import Raster
-import gdal
+from rasterio.warp import calculate_default_transform, reproject, Resamplingimport gdal
 
 def visualiseRasterDataFromFile(path, title, xlabel, ylabel):
   """
@@ -79,7 +79,6 @@ def poly_to_prox(file_name, input_filepath, raster_filepath, output_filepath):
   gdal_rasterize -l file_name -a osm_id -ts 36501.0 79501.0 -a_nodata 0.0 -te 92.125 8.74975 101.25025 28.625 -ot Byte -of GTiff input_filepath raster_filepath
   #Creating proximity layer of raster layer
   gdal_proximity.py -srcband 1 -distunits PIXEL -nodata 0.0 -ot Int16 -of GTiff  raster_filepath output_filepath
-
 
 def extractWindowedDataAndSaveData(input_path, output_path, col_off, row_off, width, height):
   """
